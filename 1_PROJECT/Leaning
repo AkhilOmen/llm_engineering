@@ -1,0 +1,9 @@
+
+
+1. For basic web scraping of a url/page we can use BeautifulSoup
+2. There are 2 different prompts that we send to AI
+    a. System Prompt
+        You specify the overall task. You specify the tone and context.
+        It's like setting the entire environment for the task to perform
+    b. User Prompt
+        This come from user and the response should be in context of the System prompt.
