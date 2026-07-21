@@ -1,5 +1,14 @@
 
 
+-------
+Install uv
+uv sync
+
+--------
+ollama run "model"
+ollama serve
+
+---------
 1. For basic web scraping of a url/page we can use BeautifulSoup
 2. There are 2 different prompts that we send to AI
     a. System Prompt

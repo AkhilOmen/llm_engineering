@@ -1,0 +1,54 @@
+
+------------
+The best LLM in the world are called as Frontier.
+But mostly "frontier models" term are referred to Closed source models
+
+Some Famous
+Closed Source Frontier models
+1. GPT from OpenAI
+2. Claude from Anthropic
+3. Gemini from Google
+4. Grok from X
+
+Open Source models
+1. Llama from Meta
+2. Mixtral from Mistral -> From French
+3. Qwen from Alibaba Cloud
+4. Gemma from Google
+5. Phi from Microsoft
+6. DeepSeek from DeepSeekAI - Main Model has 671 billion parameters
+7. GPT-OSS from OpenAI - 20B and 120B
+
+Interesting fact:
+Llama and Qwen are trained from the Synthetic data generated from DeepSeek models.
+
+------------
+1.  why it's called chat completions?
+a.  It's just predicts which work will come next, but in that process it answers out question too.
+    This technique has been invented by OpenAI but later everyone used it.
+    So almost very LLM will provide the chat completions api.
+
+------------
+The are 3 ways to use models
+1.  Chat Interface like chatgpt
+2.  Cloud APIs,
+    LLM AI
+    Framework likes LangChain,
+    Managed AI Cloud services
+        a) Amazon Bedrock
+        b) Google vertex
+        c) Azure ML
+3.  Direct Inference
+    a) HuggingFace Transformer library
+    b) Ollama to run locally
+
+------------
+gemini = OpenAI(base_url="https://generativelanguage.googleapis.com/v1beta/openai/", api_key="AIz....")
+gemini.chat.completions.create(...)
+
+This is also correct because OpenAI is a vanilla code library which can be used
+by every other company this is not chatGPT
+
+OpenAI is just light-weight python library
+
+-------
