@@ -4,11 +4,13 @@ from openai import OpenAI
 
 api_key = os.getenv('OPENAI_API_KEY')
 
+
 def create_openai_client():
     openai = OpenAI(api_key=api_key)
     return openai
 
-def openai_analyze_text(text):
+
+def openai_text_completion(text):
     openai = create_openai_client()
 
     messages = [
