@@ -1,0 +1,87 @@
+
+-----------------------------------
+There are 3 types of LLM or We can say "LLM comes in 3 Layers"
+
+1. BASE model
+    a.  It's just there to take the sequence as input and predict what would come next.
+    b.  This we encounter daily while we are chatting with someone
+        you will get what's next word while texting and if you select that word you will get next word and so on.
+    c.  These are better for fine tuning and learning new skills.
+        When we are trying to train a new model to do something different or to give it a new skill.
+        It's always better to start with base model.
+
+    gpt3 was base model
+
+    |
+
+    when you give this sequence
+    question.
+    answer.
+
+    question.
+    answer.
+
+    question. ->   Now you only give question and the base model will predict the answer.
+            As it's prompted to think in more like question and answer way.
+            And OpenAI has trained their early models with more data and more like question and answer way...
+            i.e One message and we will get response. One message and we will response ... so on.
+
+    So that's how the the CHAT variant also know as INSTRUCT variant has been created.
+
+
+2. CHAT / INSTRUCT model
+    a.  It's model that have been trained to work in the prompt style.
+    b.  Then they come with an idea there should be one "OVERALL PIECE OF INFORMATION THAT DESCRIBES THE
+        WHOLE CHAT" and then there is a "MESSAGE FROM ONE USER" to AI and it's replies and another message.
+        i.  That "OVERALL PIECE OF INFORMATION THAT DESCRIBES THE WHOLE CHAT" has become the system prompt.
+        ii. That "MESSAGE FROM ONE USER" has became user prompt.
+    c.  This was user prompt and assistant reply.. user prompt assistant reply ... so on.
+    d.  Training the model in this way is known as REINFORCEMENT LEARNING FROM HUMAN FEEDBACK (RLHF)
+    e.  That's how they got from normal GPT to CHATGPT a chat variant.
+
+    |
+
+    And suddenly some trick came. Some prompt engineering tricks to get more out of the model and one of
+    them is called "CHAIN OF THOUGHTS" prompting.
+    Just by saying "PLEASE THINK STEP BY STEP" we will get way more better results,
+    because assistant go thought things methodically.
+
+    So they started training the model to do things step by step and show the conclusion.
+    So they made the chat model to think step by step to give the answer.
+    So that's how they have created REASONING / THINKING MODEL.
+
+
+3.  REASONING / THINKING model.
+    a. They are model that have been trained first to output their thinking steps and then give the answer.
+
+    |
+
+    and most moder models are HYBRID models; e.g chatgpt-5, gemini-pro-3.5
+
+
+4. HYBRID models -> (CHAT / INSTRUCT + REASONING / THINKING)
+    a.  This is just another variation of REASONING / THINKING that able to decide how much thinking it does.
+    b.  In some mode it's hardly think it acts as CHAT model.
+    c.  In some cases it thinks based on the question we ask.
+
+
+-----------------------------------
+Techniques for better results -
+
+1. BUDGET FORCING
+    When you make the model to think longer and do more reasoning.
+
+    Its seems silly but by just adding "WAIT" in your prompt.
+    The Assistant will try to complete the sequence after wait,
+    for example "wait I shall rethink" or "wait I shall reconsider" and it will think even more.
+    This technique is called budget forcing
+
+
+-----------------------------------
+Few pointers
+    a.  Generally reasoning model with high reasoning budget perform better in all other different benchmark.
+        but they are not always better.
+    b.  Reasoning model are better for problem solving.
+    c.  chat model are better at interactive use cases like creative content generation with fast and cheap.
+    d.  Base models are best if you want to fine tune or trying to train a model to make it learn a new skill.
+
