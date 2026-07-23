@@ -1,0 +1,90 @@
+
+
+
+-----------------------
+    G - Generative (Predicting what's next in the sequence)
+    P - Pre Trained (Trained with tones of tones of data)
+    T - Transformer
+
+Transformer -
+
+    a.  In 2017 google scientists publish a seminal paper called "Attention is All You need"
+        and proposed a new model architecture called Transformer. The paper was about describing a particular structure
+        of a kinda of data science model called Neural Network
+    b.  IN 1950 Someone got an idea to build a data science model which is loosely inspired by human mind.
+        That Data science model is called Neural Network.
+    c.  The idea was, it's rather than one statical program it was lots of statical programs they were
+        all kinda a connected to gather in some way.
+    d.  Same like Human neurons, The Neural Network has a lot of little algorithms called Artificial Neurons that are
+        all connected to geather. It turn out to be effective way of learn different patterns from the data..
+        for example: predicting the credit score by comparing your data with lot of other people
+        data in calculating credit scores.
+    e.  They had a break-through work with larger Neural Networks that could take more data and be able to detect the
+        patterns even more deeply. That's how Deep Neural Network or Deep Learning came.
+    f.  Deep Learning which was about building these very very deep sets of these Neurons connected to geather.
+        They are actually stacked on each other connected to geather and more of them they are the deeper it became.
+        That's how more intelligent they became.
+
+    |
+
+    a.  In 2019 these google scientists came up with a new way to organise these Neurons as Neural Network.
+        They came up with a new architecture.
+    b.  This new architecture was specially good while handling sequences of input and being able to look back on those
+        sequences and figure out what parts of theses sequences are really matter which was a type of layer this
+        network called self attention layer i.e attention layer.
+    c.  This idea, the layer that was able to figure out "what should I pay attention to in the input sequence".
+        So this allowed them to work with much bigger Neural Networks and much bigger data sets in less time and
+        scale more effectively.
+    d.  THIS ARCHITECTURE IS CALLED TRANSFORMER
+
+
+-----------------------
+    In 2018 - OpenAI came up with their own TRANSFORMER called "GPT-1"
+    2019 - GPT-2
+    2020 - GPT-3
+    2022 - RLHF and CHATGPT
+    2023 - GPT-4
+    2024 - GPT-4o
+
+
+    This TRANSFORMER ARCHITECTURE has make it more effective but if this ARCHITECTURE was not there it would have
+    taken much more time to come to the point where we are currently today and with much costly but we would have come
+    to this point but this TRANSFORMER ARCHITECTURE made things more effective.
+
+    Alternatives to TRANSFORMER ARCHITECTURE
+    1.  State space architecture.
+    2.  There are some Hybrid architectures.
+
+-----------------------
+    Before this TRANSFORMER the architecture
+        a.  We used to use the most is called LSTM (LONG SHORT TERM MEMORY) which is type of recurrent Neural Network.
+        b.  This LSTM is more powerful than TRANSFORMER because it has a lot of ability to deeper understanding of the
+            relationship between sequence. But the issue with LSTM is parallelism it need to learn things step by step
+            that made it time consuming and complicated to try to train this things.
+        c.  parallelism is the game which made TRANSFORMER architecture stand out that's why the paper is name as
+            "Attention is All You need" rather than doing all the complicated stuff.
+
+-----------------------
+What are Parameters -
+
+    Let's start with the A Basic computer programming
+    Input => Output
+
+    Estimate Rent Program:
+    1.  Multiply the sq.ft by 5
+    2.  Multiply the floor number by 20
+    3.  Add them
+
+    These are the methods how to calculate the rent according to an expert
+    We write program to take input of sq.ft and floor number => we will get rent as output
+
+    |
+
+    Along the way machine learning came.
+    Machine learning?
+        This is not by explicitly programming to do the tasks but rather learning from the data on how to do it.
+    So the computer program is replaced by a model based on hypothesis.
+
+
+
+
