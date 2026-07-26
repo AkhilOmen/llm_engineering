@@ -1,4 +1,4 @@
-from scrapper import fetch_website_content
+from utils.scrapper import fetch_website_content
 from utils.openai_utils import openai_text_completion
 
 

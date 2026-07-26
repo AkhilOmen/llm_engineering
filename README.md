@@ -13,3 +13,22 @@
        common themes.
 
 
+**Project 2: Company sales Boucher Generator**
+    
+    Objective - 
+    Create a product that can generate marketing broucher about a company;
+    1. For prospective clients
+    2. For investors
+    3. For recruiters
+
+    Tech Used -
+    1. Open Source model
+        ) "minimax-m3:cloud" hosted on Ollama Cloud – Primary model with excellent accuracy.
+        ) "deepseek-r1:1.5b" hosted locally using Ollama – lower accuracy compared to "minimax-m3".
+    2. Web Content Extraction
+        ) BeautifulSoup for extracting website content, links, and relevant company information.
+    3. Prompt Engineering
+        ) Used budget forcing
+        ) Implemented one-shot prompting
+    4. Streaming Responses
+        ) Streamed LLM responses in real time with formatted output
