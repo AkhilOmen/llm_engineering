@@ -6,4 +6,5 @@ dependencies = [
     "beautifulsoup4>=4.15.0",
     "openai>=2.46.0",
     "requests>=2.34.2",
+    "tiktoken>=0.13.0",
 ]

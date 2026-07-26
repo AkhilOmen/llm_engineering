@@ -85,6 +85,140 @@ What are Parameters -
         This is not by explicitly programming to do the tasks but rather learning from the data on how to do it.
     So the computer program is replaced by a model based on hypothesis.
 
+    For example:
+
+        Let's understand a simple hypothesis, the rest hypothesis i.e In our case the rent depends only
+        on (No.of square feet) and (what floor it's on). Then our model might be like "Okay" let's take a quantity "A"
+        and multiply with (square feet) and let's take a quantity "B" and multiple with (floor number) and add them to
+        give us the rent, where "A" and "B" are still to be set. How do we set that "A" and "B"? Let's look at the data.
+
+        There are 2 phases in which we work with Machine Learning.
+
+        1. Training:
+            i)   When you look at a lots of examples in this case lots of examples of apartments. a) How much it costs to
+            rent them, b) How much for a sq ft, and c)  Which floor they are in.
+            ii)  In our case all of these examples will help use to figure out how can we set "A" and "B" in the best
+            possible way.
+            iii) Once we predict "A" and "B" then we move to (Inference learning).
+            iv)  That "A" and "B" are set now. We are not gonna touch those 2 values. Now we are going to predict new
+            apartment's rent which is not used while training the model this is something new. If we have done a good
+            job the values will be accurate
+        2. Inference learning - This has already been explained in previous modules
+
+    & That "A" and "B" are what we call as Parameters or weights, but in real world that apartment rent can depend on
+    other parameters i.e "C", "D" and "E" and so on...., and a typical ML model might have anywhere from
+    20-200 parameters controlling how it makes it's predictions.
+
+    To conclude -
+    Parameters are nothing but a piece of information that it fixed/set to model while training it.
+    ML models are like 20-200, but the gpt-4 is more that billions parameters.
+    So just imagine how much scale we are currently in that's huge.
 
 
+-----------------------
+Tokens -
 
+    1.  Character level:
+        In early days Neural Networks were trained at the character level. Predict the next char in sequence.
+        This was much more effective but hardly there were 100 characters and the vocab was created for that 100
+        characters.
+        Even thought it was small vocab, but predicting each character is hard and expects too much from network.
+        Training it also very tough
+
+    2.  Words Level:
+        Then Neural networks were trained with words. Predict the next word in the sequence. Much easier to learn from,
+        but leads to enormous vocabs with rare words omitted.
+
+    3.  Tokens:
+            The breakthrough was to work with chunks of words...
+            It's might be a "word", It's might be a fragment of a "word", or it might be "two words".
+            We build up a vocab with these fragments of words, as a result we can have a limited sets.
+            We can constraint it to set b/c, we go all the way to character level if we needed to.
+            We can allow the models to recognise various fragments of words which has some meaning associated with it.
+            A middle ground: manageable vocab, useful information to neural network, and elegantly handling
+            the word stems - We lean about word stems later.
+
+    Note: Tokens and Vectors are different. We will learn more about vectors in coming modules
+
+-----------------------
+Tokenizers -
+
+    Check out the "OpenAI tokenizer" to understand more how a sentence is divided into tokens.
+    Rule of thumb: In english writing:
+    a)  1 Token ~ 4 characters
+    b)  1 Token ~ 0.75 words
+    c)  1000 Tokens ~ 750 words
+    but when it come to code, maths or some scientific terms the token will be much higher because it's dense.
+
+-----------------------
+Memory:
+
+    # Case 1
+    messages = [
+        {"role": "system", "content": "you are a helpful assistant"},
+        {"role": "user", "content": "Hi my name is Akhil"}
+    ]
+    openai_response = openai.chat.completions.create(model="gpt-4.1-nano", messages=messages)
+    parsed_response = openai_response.choices[0].message.content
+    print(parsed_response)
+
+    # response
+    # Hi Akhil, How may I assist you.
+
+
+    # Case 2
+    messages = [
+        {"role": "system", "content": "you are a helpful assistant"},
+        {"role": "user", "content": "What's my name"}
+    ]
+    openai_response = openai.chat.completions.create(model="gpt-4.1-nano", messages=messages)
+    parsed_response = openai_response.choices[0].message.content
+    print(parsed_response)
+
+    # response
+    # I don't have access to you personal information, how may I assist you.
+    # Because every call we make to llm is stateless.
+
+
+    # Case 3
+    messages = [
+        {"role": "system", "content": "you are a helpful assistant"},
+        {"role": "user", "content": "Hi my name is Akhil"},
+        {"role": "assistant", "content": "Hi Akhil, How may I help you today."},
+        {"role": "user", "content": "What's my name"}
+    ]
+    openai_response = openai.chat.completions.create(model="gpt-4.1-nano", messages=messages)
+    parsed_response = openai_response.choices[0].message.content
+    print(parsed_response)
+
+    # response
+    # Your name is Akhil! How can I help you today
+    # When we use ChatGPT this is what happens it passes all out past chats into assistant's content and replies.
+    That's creates and illusion of having memory
+
+    Note:
+    1.  Every call to LLM is stateless
+    2.  We pass in the entire conversation so far in the input prompt, every time.
+        This gives the illusion that the LLM has memory - it apparently keeps the contexts of conversation.
+        But this is a trick; it's a by-product of providing the entire conversion, everytime.
+    3.  An LLM predicts most likely the next token in the sequence; if that sequence contains "My name is Akhil" and
+        later "What's my name?" then it will predict ... Akhil!
+
+-------------------
+Context window, API Pricing
+
+    Context Window: Max no of tokens that a model can consider when generating the next token.
+
+    Interesting:
+        When it's generating a sentence. It's won't generate all the text at tokens at once.
+        It generate 1st token and that 1st token will be passed in input and again next token will be generated
+
+        for example:
+            If a LLM is generating "Hi Akhil, How may I assist you"
+            1.  First it will generate "Hi" token
+            2.  This "Hi" will be feed into input prompt and again it will predict the next token i.e " Ak"
+            3.  Then this "Hi" and " Ak" will be feed into input prompt and "hil" will be predicted..
+            So to generate each token all the token before and during generation should be feed into input prompt.
+
+    Check this out. It has all details of pricing, context window... and much more
+        -> https://www.vellum.ai/llm-leaderboard
