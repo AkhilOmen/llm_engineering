@@ -1,5 +1,5 @@
 from utils.scrapper import fetch_website_content
-from utils.openai_utils import openai_text_completion
+from utils.llm_utils.openai_utils import openai_text_completion
 
 
 if __name__ == '__main__':

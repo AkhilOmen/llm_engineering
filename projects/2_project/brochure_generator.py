@@ -1,7 +1,6 @@
 import json
 
-from IPython.display import Markdown, display, update_display
-from utils.ollama_utils import create_ollama_client
+from utils.llm_utils.ollama_utils import create_ollama_client
 from utils.scrapper import fetch_website_links, fetch_website_content
 
 

@@ -1,7 +1,4 @@
-import requests
-
-from utils.gemini_utils import gemini_text_completion
-from utils.ollama_utils import ollama_text_completion
+from utils.llm_utils.ollama_utils import ollama_text_completion
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import os
 
+from google import genai
 from openai import OpenAI
 
 google_api_key = os.getenv('GOOGLE_API_KEY')
@@ -18,3 +19,14 @@ def gemini_text_completion(message: str):
     )
 
     return response.choices[0].message.content
+
+# OR
+
+def create_gemini_client_and_text_completion_with_genai():
+    client = genai.Client()
+
+    response = client.models.generate_content(
+        model="gemini-2.5-pro", contents="Tell me a joke"
+    )
+
+    return response.text

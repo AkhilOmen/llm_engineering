@@ -1,7 +1,4 @@
-
-import tiktoken
-
-from utils.openai_utils import llm_is_stateless
+from utils.llm_utils.openai_utils import llm_is_stateless
 
 if __name__ == '__main__':
     # encoding = tiktoken.encoding_for_model("gpt-4.1-mini")
