@@ -1,34 +1,51 @@
 # llm_engineering
+## 🚀 Projects
+### 1. Web Page Analysis with BeautifulSoup + OpenAI
+
+Extracts and analyzes web page content using LLMs.
+
+**Pipeline:**
+1. Parse HTML and extract text using **BeautifulSoup**
+2. Send extracted content to **OpenAI Chat Completions API**
+3. Generate summaries, sentiment analysis, and insights
+
+**Use Case:** Scrape Amazon product reviews → analyze customer sentiment, summarize feedback, and identify 
+recurring themes.
+
+▶️ analyse_website_main.py
+
+#### -
+
+### 2. Company Brochure Generator
+
+Automatically generates marketing brochures for three audiences: **prospective clients**, **investors**, 
+and **recruiters**.
+
+**Tech Highlights:**
+- 🌐 **Web extraction**: BeautifulSoup for content, links, and metadata
+- 🤖 **Dual model setup**:
+  - `minimax-m3:cloud` (Ollama Cloud) — high accuracy
+  - `deepseek-r1:1.5b` (local Ollama) — privacy + speed
+- ✍️ **Prompt engineering**: one-shot prompting + budget forcing
+- 📡 **Streaming responses** with formatted output
+
+▶️  brochure_generator.py
 
 
-**Project 1: Web Page Analysis with BeautifulSoup and OpenAI**
-
-    Step 1: Parse the website's HTML and extract the relevant textual content using BeautifulSoup.
-    Step 2: Pass the extracted content to the OpenAI Chat Completions API for intelligent analysis, 
-            summarization, and insights generation.
-
-    Use cases:
-    1. Extract reviews from an e-commerce product page (e.g., Amazon) and use the OpenAI 
-       Chat Completions API to analyze customer sentiment, summarize feedback, and identify 
-       common themes.
+---
 
 
-**Project 2: Company sales Boucher Generator**
+## 🚀 Mini Projects
+### 1. AI vs AI Debate Simulator
     
-    Objective - 
-    Create a product that can generate marketing broucher about a company;
-    1. For prospective clients
-    2. For investors
-    3. For recruiters
+Two LLMs argue autonomously — one is **argumentative**, the other **diplomatic**. Hilarious and surprising 
+results.
 
-    Tech Used -
-    1. Open Source model
-        ) "minimax-m3:cloud" hosted on Ollama Cloud – Primary model with excellent accuracy.
-        ) "deepseek-r1:1.5b" hosted locally using Ollama – lower accuracy compared to "minimax-m3".
-    2. Web Content Extraction
-        ) BeautifulSoup for extracting website content, links, and relevant company information.
-    3. Prompt Engineering
-        ) Used budget forcing
-        ) Implemented one-shot prompting
-    4. Streaming Responses
-        ) Streamed LLM responses in real time with formatted output
+**Features:**
+- 🤖 Dual-model setup: **Groq** (`openai/gpt-oss-20b` / `openai/gpt-oss-120b`) + **Ollama** (`minimax-m3:cloud`)
+- 💬 Autonomous multi-turn conversations
+- 🧠 Independent conversation memory per agent
+- 🎭 Configurable personalities
+- 🔄 Easy model swapping
+
+▶️  llm_s_conversations.py

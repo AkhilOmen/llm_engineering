@@ -89,9 +89,16 @@ ROUTERS LAYERS
 -------------------
 ABSTRACTION LAYER -
 
-    
+    Also known as framework, llm frameworks.. the most famous is "Langchain"
 
+-------------------
+PROMPT ENGINEERING TECHNIQUES -
 
+    How the prompt cache works?
+        Also put the dynamic values at last in prompt, because prompt will be cached from the starting of user input
+        and till the point there is dynamic value. If the dynamic value is there in the starting only... it will never
+        cache.
 
+    All gemini models will anto cache, for claude models we have to activate the cache
 
-
+-------------------

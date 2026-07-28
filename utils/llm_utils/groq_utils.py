@@ -4,7 +4,7 @@ from openai import OpenAI
 
 groq_api_key = os.getenv('GROQ_API_KEY')
 
-GROQ_MODEL = "openai/gpt-oss-120b"
+GROQ_MODEL = "openai/gpt-oss-20b"
 
 def create_groq_client():
     GROQ_BASE_URL = "https://api.groq.com/openai/v1"
