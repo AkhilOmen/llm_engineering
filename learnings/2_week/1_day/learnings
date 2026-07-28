@@ -79,7 +79,7 @@ TRAINING VS INFERENCE TIME SCALING
     gpt-oss-120b -> don't run this on you local.. It requires like 15gm ram. My laptop almost got crashed.
 
 -------------------
-Routers and Abstraction layer
+ROUTERS LAYERS
 
     openrouter.ai will help to connect to any model we want.
     It's like all models in one place rather than creating multiple interfaces for each model
@@ -87,6 +87,11 @@ Routers and Abstraction layer
     visit -> https://openrouter.ai/
 
 -------------------
+ABSTRACTION LAYER -
+
+    
+
+
 
 
 

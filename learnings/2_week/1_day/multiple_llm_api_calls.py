@@ -1,3 +1,7 @@
+from utils.llm_utils.groq_utils import groq_text_completion
+from utils.llm_utils.ollama_utils import ollama_chat_with_langchain, ollama_text_completion
+from utils.llm_utils.openrouter import openrouter_text_completion
+
 if __name__ == '__main__':
     question_1 = """
     You toss 2 coins. One of them is heads. What's the probability that other is tails? 
@@ -26,3 +30,20 @@ if __name__ == '__main__':
     # print(openrouter_text_completion(message=question_2))
     # print(groq_text_completion(message=question_3))
 
+    # langchain
+    # print(ollama_chat_with_langchain(message="Tell me a Joke"))
+
+    # litellm
+    from litellm import completion
+    result = completion(
+        model="openai/gpt-4.1",
+        message="Tell me a joke"
+    )
+    response = result.choices[0].message.content
+    print(response)
+
+    # The best part about this litellm is that we can close the cost and tokens it has used.
+    print(f"Input tokens: {response.usage.prompt_tokens}")
+    print(f"Output tokens: {response.usage.completion_tokens}")
+    print(f"Total tokens: {response.usage.total_tokens}")
+    print(f"Total cost: {response._hidden_params["response_cost"] * 100:.4f} cents")
