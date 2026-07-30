@@ -12,4 +12,5 @@ dependencies = [
     "anthropic>=0.120.0",
     "langchain-openai>=1.4.1",
     "litellm>=1.93.0",
+    "gradio>=6.21.0"
 ]

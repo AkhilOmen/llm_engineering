@@ -22,7 +22,10 @@ def ollama_text_completion(message: str):
     ollama = create_ollama_client()
     response = ollama.chat.completions.create(
         model=OLLAMA_MODEL,
-        messages=[{"role": "user", "content": message}]
+        messages=[
+            {"role": "system", "content": "You are an helpful assitant"},
+            {"role": "user", "content": message}
+        ]
     )
 
     return response.choices[0].message.content
