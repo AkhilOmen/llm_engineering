@@ -1,0 +1,63 @@
+
+
+
+------------------
+Tools:
+
+    -----
+    "WHAT" does it mean to give a model the tools?
+
+    You are giving the model/llm the ability to connect to external functions to be able to call the function.
+    It allows then to get:
+        1.  Deeper/Richer responses b/c we can extent the knowledge cause it can use a tool to retrieve something
+            perhaps from DB or anything that we connect the model with.
+        2.  Ability to carryout the actions within the application.
+        3.  It enhances capabilities, like executing the python code, write a test case, book a ticket.
+
+    BUT WAIT:
+    So we are going to give an LLM the ability to run the code?
+
+    How did that happen? b/c an LLM is like a data science model. A model which predict tokens. It output token.
+    How they started running functions which are on my computer? The answers is the don't :)
+
+    The actual way it works is..
+    1. The code makes a call to LLM. Like I want to do 1, 2 and 3...
+    2. Then LLM inform code that, in order to do these we have to run a tool.
+    3. Then it's our code runs the tool and come back with the answer
+    4. Then we again call the LLM 2nd time with that answer and say hey this is our conversation history
+        a. I ask you a question -> ("role": "user")
+        b. You asked question the tool -> ("role": "assistant")
+        c. Here the answer for that question, and now please answer the question -> ("role": "user")
+    5. And, based on this conversation history by taking all that into account, LLM responds back.
+
+    It's just more messages in the conversation history, and that messages include "a request to call a tool".
+    That's all there is... the LLM is till just generating tokens.
+
+    But how does LLM knows to respond with these tokens says "I did like to call this tool".
+    This is very simple the first prompt that you send to LLM.
+    You said "Hey I want you to do these following things, by the way I have the ability to run some tools on your
+    behalf. If you want to run this tool simple say run this tool. I will get back to you".
+
+    That's all there is in your first prompt you explained what tools can be runed in a way LLM has already been
+    trained. So it's ready to expect that format of tool calling. You do it by describing Json.
+
+    -----
+    "WHY" we use tools?
+
+    1. Fetch data from DB or anywhere, and add knowledge to context
+    2. Taking actions, like booking a meeting
+    3. Perform calculations or run code.
+        LLM are pretty bad at doing calculations, but chatGPT was given these tools b/c of which it was able to do
+        better calculations.
+    4. Modify the UI
+    .
+    .
+    .
+    and many more
+    |
+    Two other ways to use tools that form basics of Agentic AI:
+    1. A tool can be used to make another call to an LLM.
+    2. A tool can be used to track a To-Do list and track progress towards a goal.
+
+
+    
