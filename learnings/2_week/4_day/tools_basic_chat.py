@@ -1,7 +1,10 @@
 import gradio as gr
 import json
 
-from utils.llm_utils.groq_utils import create_groq_client, GROQ_MODEL
+from db.databricks import DatabricksDB
+from db.models.pricing import Pricing
+from db.repositories.pricing_repository import pricing_repository
+from utils.llm_utils.groq_utils import create_groq_client
 from utils.llm_utils.ollama_utils import create_ollama_client, OLLAMA_MODEL
 
 system_message = (
@@ -24,17 +27,42 @@ ollama = create_ollama_client()
 #     return response.choices[0].message.content
 
 
-def get_ticket_price(destination_city):
-    city_ticket_price_mapping = {
-        "london": "$700",
-        "usa": "$500",
-        "russia": "$800",
-        "berlin": "$1600",
-        "barcelona": "$4500",
-    }
+# def get_ticket_price(destination_city):
+#     city_ticket_price_mapping = {
+#         "london": "$700",
+#         "usa": "$500",
+#         "russia": "$800",
+#         "berlin": "$1600",
+#         "barcelona": "$4500",
+#     }
+#
+#     price = city_ticket_price_mapping.get(destination_city.lower(), "Unknown place")
+#     return f"The price is {price} for the city {destination_city}"
 
-    price = city_ticket_price_mapping.get(destination_city.lower(), "Unknown place")
-    return f"The price is {price} for the city {destination_city}"
+
+# ----------
+# DataBricks
+# def get_ticket_price(destination_city):
+#     databricks = DatabricksDB()
+#     databricks.get_connection()
+#     query = f"""
+#         SELECT *
+#         FROM llm_engineering.core_schema.pricing
+#         WHERE LOWER(destination_city) = '{destination_city.lower()}'
+#     """
+#     results = databricks.retrieve_data(query)
+#     databricks.close()
+#     return f"The price is {results[0][3]} for the city {destination_city}"
+
+
+# ----------
+# Postgres
+def get_ticket_price(destination_city):
+    results: list[Pricing] = pricing_repository.get_by_destination(destination_city=destination_city)
+    if results:
+        return f"The price is {results[0].price} for the city {destination_city}"
+    else:
+        return "Unknow city"
 
 
 price_function = {

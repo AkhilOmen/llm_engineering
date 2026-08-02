@@ -1,0 +1,66 @@
+
+
+
+--------------
+DataBricks
+
+    Backstory why DataBricks came into picture
+        WHY?
+        Data engineer were using - Apache Spark to process the data.
+        Data Scientists were using - Jupyter Notebook to build Machine Learning Models
+        Data Analysts were using - SQL for their business Intelligence
+        and
+        ML Ops teams were using separate platform for model deployment.
+
+        This created what we called Data Silos
+        Data Silos:
+            Data Silos are the collections of data held in separate systems or departments within an organisation,
+            making that data inaccessible or isolated from other parts of the business.
+
+        Imagine you are a data scientists working on a ML model, now you wants to deploy your model into production,
+        but wait data engineers are using completely different tools to process the data and ML engineers are using
+        completely different tools to deploy the models, and data analysts can't even access the data.
+        This back and forth use to take weeks and even months, basically companies are spending more time on
+        infra/management rather than an actually taking the insights and decisions.
+        There was a major gap, studies shows that 87% of ML projects never made it to productions.
+
+        So the Industries need unified platform for Data Engineers, Data Scientists, Data Analysts and ML Engineers.
+        This is where the DataBricks came into the picture..
+
+    |
+
+    built on top of Apache Spark to provide cloud based, collaborative environment to handle all those things.
+
+    What is DataBricks?
+        It's a unified analytics platform that combines data engineering, data science, ML, and analytics at once place.
+
+    Architecture of DataBricks:
+        At the highest level databricks has 2 components
+        1. Control Plane
+        2. Compute Plane
+
+        1. Control Plane:
+            Place where data bricks manages all of the backend service. It's the things that you don't have to worry
+            about, data bricks has taken care off.
+
+            for example:
+            a. The web application that we interact with
+            b. User management
+            c. Cluster orchestration
+            d. Job scheduling
+
+            Think like CONTROL PLANE is the brain of databricks.
+            This run on databricks account itself so we don't have to worry about.
+            So the CONTROL PLANE is more about backend services or things that we interact with.
+
+        2. Compute Plane:
+            This is the area where the data is actually processed.
+
+            There are 2 types of COMPUTE PLANE
+            a. Serverless compute plane
+                In this databricks manages compute in their own account. So we just focus on writing the code and
+                getting the work done, and don't need to worry about scaling or Infra anything.
+            b. Classic Compute Plane
+                So all of the compute will run in our own personal AWS or Azure account. We have to manage all the
+                network and Infra from outside.
+

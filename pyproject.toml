@@ -12,5 +12,9 @@ dependencies = [
     "anthropic>=0.120.0",
     "langchain-openai>=1.4.1",
     "litellm>=1.93.0",
-    "gradio>=6.21.0"
+    "gradio>=6.21.0",
+    "databricks-sql-connector>=4.4.0",
+    "sqlalchemy>=2.0.51",
+    "psycopg[binary]>=3.3.4",
+    "python-dotenv>=1.2.2",
 ]
