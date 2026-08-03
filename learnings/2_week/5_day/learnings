@@ -1,0 +1,20 @@
+
+
+------------
+Agents
+
+    Agents can be defined in 2 ways:
+    1. LLM that control the workflow
+    2. An LLM agent runs tools in a loop to achieve a goal
+
+    common features/characteristics:
+    1. Memory/Persistence
+    2. Planning capabilities
+        To be able to plan activities
+    3. Autonomy
+        The sense of autonomy that LLM needs to make the decision on what happens next
+    4. LLM orchestration via Tools
+        The LLM to be able to orchestrate what happens next using tools
+    5. Functionality via Tools
+
+    Check out Week5
