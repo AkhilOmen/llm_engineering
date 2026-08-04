@@ -1,0 +1,53 @@
+
+
+-------------------
+HUGGING FACE PLATFORM
+
+    1. It has open source models of all shapes and sizes
+    2. Data sets -> A treasure trove of data sets
+    3. Spaces -> App, many build in gradio, including leaderboards
+
+-------------------
+HUGGING FACE LIBRARIES
+
+    - Open source libraries they made available
+    - These Open source libraries that implemented via Transformer models using pytorch and tensorflow
+
+    pytorch, tensorflow -> Deep Neural Networks libraries
+
+-------------------
+Ollama vs Open source
+
+    Ollama
+        It's like a software product which runs on our machine, we don't get to run an code of it. It's like
+        a application. It's able to take files which are efficiently packed models like gemma or llama. They have
+        packaged these files called gguf file and it run it with efficient c++ code
+
+    Open source:
+        We get access to the actual code, the actual python code. We can run the model ourselves in IDE. We can changes
+        the code, we can swap layers in Neural Networks and we can play around.
+
+        We can also do fine tuning on these.
+
+-------------------
+Some libraries
+
+    1. hub
+        This is the library that let's you connect to the hugging face hub to download the models, datasets.
+    2. datasets
+        when you connect to hub and download the dataset then that dataset will become the part of this library.
+        Each object represent a dataset
+    3. transformers
+        Transformers library let's you say. I want this model, and I want code for it.
+        I want to able to run it, I can train it or do anything with it. This library will help you do all those.
+    4. peft -> parameter efficient fine tuning
+        It's a way to able to train our model and not required to teek the; e.g 8B parameters. We can do a more
+        efficient way and this peft library will help use to do it.
+    5. trl -> transformers reinforcement learning
+        training transformers
+    6. accelerate
+        This will allow use to use to distribute models across multiple GPUs
+
+-------------------
+Google Colab
+    https://colab.research.google.com/drive/1jifxQI9msJmCSh4tLKUWVJ26NXObiRm1#scrollTo=IJEGG5Ow5h-O
