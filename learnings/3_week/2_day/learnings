@@ -1,0 +1,26 @@
+
+
+------------------
+The two API levels of Hugging face
+
+    Lower level -
+        It's about Tokenization and Models.
+        It's a granular apis where we get to work with Deep Neural Network and It gives more power and more control
+
+    Higher level -
+        These pipelines helps us to carry out standard tasks quickly
+        We can use pipelines when we want to something out-of-box, preconditioned or Inference tasks. When we run a
+        model to achieve the business objective
+
+        The common pipelines:
+        1. Sentiment analysis
+        2. Classifier -> Helps us to classify a person or place
+        3. Named entity Recognition -> Takes a sentence and tells these are people or places
+        4. Question and Answering
+        5. Summarization
+        6. Translation
+
+
+
+
+
