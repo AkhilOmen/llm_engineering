@@ -1,0 +1,27 @@
+
+
+------------------
+Tokenizers
+
+    1. Maps b/w text and token for a particular model
+        Natural Language -> Tokens
+        These Tokens are mapped to their token IDs
+
+    2. Tokenizers have the dictionary as well
+        - It had the list of all possible tokens and their IDs
+        - It also contains special tokens that don't maps to any natural language word
+            for example:
+                "This is the start what I want to tell you"
+                "This is the beginning of the the prompt"
+            and these special tokens had their own token IDs
+
+    3. Each LLM have their own tokenizers
+        - Llama 3.1 -> Meta
+        - Phi 4 -> Microsoft
+        - Deepseek 3.1 -> from Deepseek AI
+        - Qwen 3.1 coder ->
+
+------------------
+Google Colab
+
+    https://colab.research.google.com/drive/1yMpMUJddBaTydsKKAvV37msmlIQxY6t2#scrollTo=lljCmYeSxzf5
