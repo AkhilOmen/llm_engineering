@@ -1,0 +1,204 @@
+
+
+---------------
+Quantization
+
+    It's a hack/trick to use less memory and less decrease in precision.
+
+    a.  When we work with Deep Neural Network, we have to deal with lots of the parameters, and all these
+        Numbers/Parameters are in 16 bits / 32 bits. They have a lot precision.
+    b.  There is a simplification that we can do like cutting down the memory by taking each of these number
+        which are stored in 16 / 32 bits and store them with lower precision by using fewer bits and make up a number
+
+    Let's take an Example:
+        Dimmer switch of a light bulbs
+        When rotate the switch the light will decrease or increase
+
+        1. If the light has 16 or 32 modes/settings the rotation will be very smooth
+        2. Now we reduce it to 8 or 4 modes/setting then the dimmer switch will become less smoother. It will start making
+        sounds like click, click.
+
+    That's what it's like to take all these Parameters (Dimmer switches) all over our Neural Network layers and reduce
+    the precision down to 8 or 4 bits from 16 or 32 bits.
+
+    AND DOING THAT IS KNOW AS QUANTIZATION.
+
+    *   We can think it as a quantising; turn it into something which has a discrete possible values and we reducing the
+    precision so that we can squeez more into less memory. We can take less memory and the calculation wil b/c
+    much more simple.
+    *   If we are moving from 16 bits -> 4 bits then we are reducing 4 times of calculations and so that saving 4 times
+        memory
+
+    Read about NF4
+
+
+---------------
+Model Internals
+
+    When you look internal into the model this is how it's going to look.
+    Here I am taking "Llama-3.1-8b-Instruct" model as example. Below is how it's going to look internally.
+
+            LlamaForCausalLM(
+              (model): LlamaModel(
+                (embed_tokens): Embedding(128256, 4096)
+                (layers): ModuleList(
+                  (0-31): 32 x LlamaDecoderLayer(
+                    (self_attn): LlamaAttention(
+                      (q_proj): Linear4bit(in_features=4096, out_features=4096, bias=False)
+                      (k_proj): Linear4bit(in_features=4096, out_features=1024, bias=False)
+                      (v_proj): Linear4bit(in_features=4096, out_features=1024, bias=False)
+                      (o_proj): Linear4bit(in_features=4096, out_features=4096, bias=False)
+                    )
+                    (mlp): LlamaMLP(
+                      (gate_proj): Linear4bit(in_features=4096, out_features=14336, bias=False)
+                      (up_proj): Linear4bit(in_features=4096, out_features=14336, bias=False)
+                      (down_proj): Linear4bit(in_features=14336, out_features=4096, bias=False)
+                      (act_fn): SiLUActivation()
+                    )
+                    (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+                    (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+                  )
+                )
+                (norm): LlamaRMSNorm((4096,), eps=1e-05)
+                (rotary_emb): LlamaRotaryEmbedding()
+              )
+              (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+            )
+
+    This structure represents the whole Neural Network of a model. Let's understand one by one.
+    Here is how we can look at this structure
+            (model)
+                > embed_tokens
+                > layers
+                    > self_attn
+                        > q_proj
+                        > k_proj
+                        > v_proj
+                        > o_proj
+                    > mlp
+                        > gate_proj
+                        > up_proj
+                        > down_proj
+                        > act_fn
+                    > input_layernorm
+                    > post_attention_layernorm
+                > norm
+                > rotary_emb
+            (lm_head)
+    So first it's "embedding" and "32 layers" after that "llm_head" at the end.
+
+    LlamaForCausalLM -> "Llama" + "CausalLM"
+        "Llama" is just a company given name.
+        "Causa LLM" is the name that HuggingFace gives to LLM which generate contents.
+
+    (model)
+        It's just represents the model that "CausalLM" contains
+
+    (embed_tokens): Embedding(128256, 4096)
+        The numbers in this is trying to represent the dimensionality of the layer.
+        "128256" (Vocabulary Size) → Number of possible input tokens.
+        "4096" (Embedding Dimension) → Length of the vector(array of numbers) representation for each token.
+
+        What exactly Embedding is doing?
+            >   It's just taking tokens of an input and it's turning into bunch of number which best represents it's
+                understanding of what that token represents.
+            >   It's a mixer that mixes every possible token into whole 4096 different number.
+
+        For example:
+            Hello world
+
+            After tokenization:
+            [9906, 1917]
+
+            embedding layer simply performs a lookup:
+                embedding[9906]   # 4096-dimensional vector
+                embedding[1917]   # another 4096-dimensional vector
+
+                Result:
+                [
+                  [0.15, -0.32, ..., 1.24],   # Hello
+                  [-0.41, 0.88, ..., -0.55]   # world
+                ]
+
+        How many parameters does this layer have?
+            Vocabulary × Embedding Dimension
+            128256 × 4096 = 525,336,576 parameters
+            If stored in FP16:
+            525M × 2 bytes ≈ 1.05 GB (So the embedding layer alone occupies roughly 1 GB of model memory)
+
+        This is called VECTOR EMBEDDING
+
+    (rotary_emb):
+        It's just a technique llama user called rotary embedding which is a particular way that makes sure words in a
+        sequence, the order in which they appear is sort of effected.
+
+    (layers):
+        The 32 layers where all the action happens
+
+    (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+        It takes the final 4096-dimensional vector and predicts which of the 128,256 tokens is most likely to come
+        next.
+
+    |
+
+    Now the major part let's understand the (layers)
+    (layers):
+        The 32 layers where all the action happens.
+
+        Transformers are often describes as combining Encoder Layers with Decoder Layer but most of the latest LLM
+        models only have Decoder layers as above example of Llama.
+
+        So the Decoder in Llama architecture consists of
+        > attention layer - This is the thing google invented
+            >   There are just mixing or algorithms which designed to mix the layer above.
+            >   But In particular what they are trying to do is, figure out what is it the layers before me that I
+                should be paying attention too.
+            >   And they learn over time what their weights are set too to determines how they incorporate all the
+                information in the layer above.
+            >   And they do it by learning 4 different things. Something called
+                (q_proj) query -> Which is, "WHAT I AM LOOKING FOR"
+                (k_proj) key -> Which is, "WHAT EACH ONE TRYING TO INFORM ME"
+                (v_proj) value -> Which is, "WHAT IS INFORMATION IN EACH PARTS OF THE LIST"
+                (o_proj) output -> Which is, "FINAL OUTPUT IN DOING ALL OF THESE"
+            >   query, key, value, output which are 4 types of parameters that get learned by the self attention layer.
+            >   Final Conclusion: It's all about figuring out what matters from the layers that came before me.
+        > mlp - Multilayer Perceptron
+            >   This is the core of any Neural Network
+            >   (gate_proj) ->
+                    Its something that's trying to figure out what matters with all of these dimensions.
+                    How can I filter the stuff that matters. Part of this gate is also called as None Linearity.
+            >   (up_proj) -> up projections
+                    Is something that explodes out the number of dimensions.
+                    In our case "Linear4bit(in_features=4096, out_features=14336, bias=False)"
+                    It increased the dimensions from 4096 to 14336
+            >   (down_proj) -> down projections
+                    Linear4bit(in_features=14336, out_features=4096, bias=False)
+                    It's convert the dimensions back to 4096 from 14336 that we have before.
+            >   (act_fn) -> activation function
+                >   In this entire layer the (act_fn) is more important.
+                >   The activation function (act_fn) is important because it adds non-linearity to the layers output.
+                    Without it, the MLP could only learn simple linear relationships and wouldn't be able to understand
+                    complex patterns in language.
+                >   All these layers are connected to geather and this act_fn add that tiny distortion into the output,
+                    like something that messy with the output in someway it isn't just a linear combination is what we
+                    called non linear combination.
+                >   As soon as we do this.. each layer will be able to influence the final output in slightly different
+                    way and suddenly all of these layers become meaningful
+                >   LLama uses SiLU -> https://docs.pytorch.org/docs/2.13/generated/torch.nn.SiLU.html
+                >   ReLU: We can also take this, https://docs.pytorch.org/docs/2.13/generated/torch.nn.ReLU.html
+            >   This is Multilayer Perceptron in each of these 32 layers.
+        > layernorm
+            It's just a mathematical trickery to try and make sure the numbers behave them selves and don't get flying
+            too much or too small. This is called normalizing the numbers
+
+
+---------------
+Streaming
+
+
+
+---------------
+Google Colab
+
+    https://colab.research.google.com/drive/1sD9MdUiTsYd9rv8hnxNEZyVWBUyXSj4e#scrollTo=TSnzJWRzi6Az
+
