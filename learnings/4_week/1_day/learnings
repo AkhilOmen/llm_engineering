@@ -1,0 +1,69 @@
+
+
+---------------
+What's the right LLM for the task at hand
+
+    1. Start with basics
+        > Parameters
+        > Content Length
+        > Pricing
+
+    2. Look at the results
+        > Benchmarks
+        > Leaderboard
+        > Arenas
+
+    Compare the following features of an LLM
+    The Basics (1)
+        > Open source or closed
+        > Chat/Reasoning/Hybrid
+        > Release Data and Knowledge Cutoff
+        > Parameters
+        > Training Tokens
+        > Context Window
+    The Basics (2)
+        > Inference cost - API charge or Runtime Compute
+        > Training Cost
+        > Build cost
+        > Time to Market
+        > Rate Limit
+        > Speed
+        > Latency
+        > License
+
+---------------
+The Chinchilla Scaling Law:
+
+    >   The idea is how do we scale the model
+    >   If the parameters are currently 8B and if we increase it to 16B parameters and can we get twice the
+        performance from the model?
+    >   Number of parameters (Directly Proportional) Number of training token
+
+    But this law has lost it's fame lately because of a lot of inference techniques which are help use to squeeze a lot
+    with even less parameters like RAG
+
+---------------
+Hard, Next-level Benchmarks
+
+        Benchmarks                  What's being evaluated                  Description (Read about them)
+        -------------               ---------------                         ---------------
+1.      GPQA                        PHD Science Expertise                   448 experts questions...
+2.      MMLU-PRO                    language Understanding
+3.      AIME                        Math
+4.      Live code Bench             Coding
+5.      MuSR                        Reasoning
+6.      HLE                         Super Human Intelligence
+
+
+---------------
+Limitation of Benchmarks
+
+    1. Training data contamination
+    2. Non Consistently Applied
+    3. Too Narrow in Scope
+    4. Hard to measure nuanced reasoning
+    5. Saturation
+    6. Overfitting
+
+    And one new concern, not yet proven
+    > Frontier LLMs may be aware that they are being evaluated so they changes their behaviour.

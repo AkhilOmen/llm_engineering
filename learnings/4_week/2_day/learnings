@@ -1,0 +1,36 @@
+
+
+
+---------------
+AI Leaderboards:
+
+    > Artificial Analysis (Very good)
+    > Vellum (Include API costs & Context Window)
+    > Scale.com (SEAL Leaderboard)
+    > HuggingFace (Open Source leaderboard)
+    > Live bench (Contamination Free) (Super reliable)
+
+    > LM Arena - You can be judge
+
+---------------
+Commercial Use cases:
+
+    Automate, then came Augment, and then came Differentiate
+
+    1. ChatGPT Wrappers
+        > DuoLingo
+        > Copilots
+        > Many more
+
+    2. Specialized
+        > Harvey
+        > Nebula.io
+        > Khanmigo
+        > Salesforce health
+        > Palantir
+        > Many more
+
+    3. Agentic
+        > Claude Code
+        > OpenAI Codex
+        > OpenAI Agent

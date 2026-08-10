@@ -1,6 +1,11 @@
+from pathlib import Path
+
 from starlette.config import Config
 
-config = Config()
+BASE_DIR = Path(__file__).resolve().parent.parent
+ENV_FILE = BASE_DIR / ".env"
+
+config = Config(ENV_FILE)
 
 class Settings:
     POSTGRES_HOST = config("POSTGRES_HOST", cast=str, default=None)
@@ -12,6 +17,8 @@ class Settings:
     DATABRICKS_SERVER_HOSTNAME = config("DATABRICKS_SERVER_HOSTNAME", cast=str, default=None)
     DATABRICKS_HTTP_PATH = config("DATABRICKS_HTTP_PATH", cast=str, default=None)
     DATABRICKS_TOKEN = config("DATABRICKS_TOKEN", cast=str, default=None)
+
+    OPENAI_API_KEY = config("OPENAI_API_KEY", cast=str, default=None)
 
 
 settings = Settings()

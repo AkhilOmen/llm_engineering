@@ -2,11 +2,10 @@ import os
 
 from openai import OpenAI
 
-api_key = os.getenv('OPENAI_API_KEY')
-
+from core.config import settings
 
 def create_openai_client():
-    openai = OpenAI(api_key=api_key)
+    openai = OpenAI(api_key=settings.OPENAI_API_KEY)
     return openai
 
 
