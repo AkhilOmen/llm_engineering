@@ -1,0 +1,49 @@
+
+
+------------
+what's the business problem are you solving?
+
+    An AI Engineer wear 2 hats
+
+    ------------------------
+    |    Data Scientist      |
+    ------------------------
+        1. What business problem are we solving?
+        2. How will you measure success
+        3. What data do you have, and what data do you need?
+
+    ------------------------
+        Software Engineer
+    ------------------------
+        1. what architecture?
+        2. How to integrate?
+        3. Which framework?
+        4. Which vector DB?
+
+    The 5 step strategy:
+    > Understand the business problem
+    > Prepare by selecting right model
+    > Select model by prototype
+    > Customize with Inference Techniques
+    > Productionize
+
+
+------------------------
+How to evaluate the performance of a GenAI Solution
+
+    There are 2 kinda metrics
+    1. Model-Centric or Technical Metrics
+        > Loss (eg. cross-entropy loss)
+        > Perplexity (Higher means less Intelligent)
+        > Accuracy
+        > Precision, Recall, FI
+        > AUC-ROC
+        Easiest to Optimize with
+
+    2. Business Centric or Outcome Metrics
+        > KPIs tied to business objectives
+        > ROI
+        > Improvements in time, cost or resources
+        > Customer satisfaction
+        > Benchmark Comparison
+        Most tangible Impact
