@@ -18,5 +18,11 @@ dependencies = [
     "psycopg[binary]>=3.3.4",
     "python-dotenv>=1.2.2",
     "matplotlib>=3.11.1",
-    "networkx>=3.6.1"
+    "networkx>=3.6.1",
+    "langchain-community>=0.4.2",
+    "langchain-huggingface>=1.2.2",
+    "langchain-chroma>=1.1.0",
+    "sentence-transformers>=6.0.0",
+    "plotly>=7.0.0",
+    "numpy>=2.5.1",
 ]

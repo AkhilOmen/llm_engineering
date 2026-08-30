@@ -1,0 +1,22 @@
+
+
+
+-------------
+LangChain
+
+    >   Open Source framework launched in october 2022
+    >   Provide a common framework for interaction with many LLMs
+
+    PROs:
+        1.  Simplifies the creation of application using LLMs (eg. AI Assistants, RAG, Summarization)
+            - Fast time to market
+        2   Significant adoption on Market. Good to have in resume
+
+    CONs:
+        1.  As APis for LLMs have matured, Converged and Simplified, the need for a uniformed framework like langchain
+            has decreased particularly with OpenAI endpoint.
+        2.  Even thought initially LangChain has started as lightweight but over time it became heavyweight abstraction
+            layer than LiteLLm and others, and some of it's code can be 'legacy'
+
+-------------
+
