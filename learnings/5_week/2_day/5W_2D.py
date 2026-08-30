@@ -9,7 +9,7 @@ if __name__ == '__main__':
     )
     vectorstore = convert_chunks_into_vectors_and_store(chunks)
     get_vector_dimensions(vectorstore)
-    # data_visualization_2d(vectorstore)
-    data_visualization_3d(vectorstore)
+    data_visualization_2d(vectorstore)
+    # data_visualization_3d(vectorstore)
 
     pass

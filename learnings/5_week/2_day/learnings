@@ -19,4 +19,13 @@ LangChain
             layer than LiteLLm and others, and some of it's code can be 'legacy'
 
 -------------
+Encoder and Embedding Models
 
+    >   The Encoder model turns text into a vector Embedding. This is then stored in a vector Database in Chroma.
+    >   Chroma -> It's an Open Source Vector DB.
+    > Few Embedding Models:
+        1.  Word2Vec
+        2.  BERT
+        3.  OpenAI -> text-embedding-3-small, text-embedding-3-large
+        4.  Google -> gemini-embedding-001
+        5.  HuggingFace sentence transformer -> all-MiniLM-L6-v2

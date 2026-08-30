@@ -5,6 +5,7 @@ import numpy
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_community.embeddings import OllamaEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -51,10 +52,14 @@ def covert_docs_into_chunks(folders_path, chunk_size, chunk_overlap):
 
 def convert_chunks_into_vectors_and_store(chunks):
     # embeddings = HuggingFaceEmbeddings(model="all-MiniLM-L6-v2")
-    # embeddings = HuggingFaceEmbeddings(model="Qwen/Qwen3-Embedding-4B")
+    embeddings = HuggingFaceEndpointEmbeddings(
+        model="Qwen/Qwen3-Embedding-8B",
+        task="feature-extraction",
+        huggingfacehub_api_token=settings.HUGGINGFACE_ACCESS_TOKEN
+    )
     # embeddings = OllamaEmbeddings(model="ryanshillington/Qwen3-Embedding-8B:latest")
     # embeddings = OpenAIEmbeddings(model="text-embedding-3-small", api_key=settings.OPENAI_API_KEY)
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-large", api_key=settings.OPENAI_API_KEY)
+    # embeddings = OpenAIEmbeddings(model="text-embedding-3-large", api_key=settings.OPENAI_API_KEY)
     db_name = "vector_db"
 
     if os.path.exists(db_name):

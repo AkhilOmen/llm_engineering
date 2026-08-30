@@ -19,6 +19,7 @@ class Settings:
     DATABRICKS_TOKEN = config("DATABRICKS_TOKEN", cast=str, default=None)
 
     OPENAI_API_KEY = config("OPENAI_API_KEY", cast=str, default=None)
+    HUGGINGFACE_ACCESS_TOKEN = config("HUGGINGFACE_ACCESS_TOKEN", cast=str, default=None)
 
 
 settings = Settings()
