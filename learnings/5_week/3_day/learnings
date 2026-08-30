@@ -1,0 +1,52 @@
+
+
+
+
+----------------
+temperature
+
+    1.  It's something that controls how much verify there is in the output that comes from th model.
+        So it's the parameter that controls how different it would be each time you call it.
+    2.  A temperature = 0; means it should be predictable and deterministic. The higher temperature means more varity,
+        more difference in the answers each time you call it.
+    3.  Some people says more temperature means more creativity. I don't this it's right.
+    4.  What was it actually doing?
+        a.  Its actually controlling at Inference time when we are generating token by token.
+        b.  It's to do with how you pick which token comes next? A model or LLM doesn't predict a single next token.
+            It predicts the probability of all possible next token every i.e every possible next token get
+            some probability even it's a very small probability
+        c.  Usually it picks the token that got the highest probability. One that the model says most likely next token.
+        d.  With (temperature=0); All it does is to pick the token which got the highest probability and It pick that one
+            token every single time. So, it's less random and more predicatable
+        e.  with (higher temperature); we occasionally picks the tokens which didn't get the top probability, but may
+            be the 2nd top or something like that.
+    5. For Example:
+        a. In case of OpenAI -> The temperature varies from 0 to 2
+            > A temperature of 1 means
+                > If a token gives a probability of 10% then we will pick that one 10 in 100 times
+                > If a token get 1% probability; and it's really unlikely, still 1 in 100 times we might pick that one
+                  if temperature is 1.
+                > So there is more varity what comes out, but it doesn't means it's more creative. It means the word
+                  choices would be different and sometime it might be bit odd when temperature is high enough. In fact
+                  when the temperature=2; we can get quite strange answers.
+    6.  2 Notes:
+        a. We use words called deterministic and reproducible, but that's not quite right, because even with
+           temperature 0, the output won't necessarily reproducible. Because there are random numbers involve running
+           in LLMs.
+        b. We can do something like setting a random c, which means those random numbers will be same each time.
+           Even when we set random c it's still not guaranty to be same everytime, because there can be changes to
+           frontier models, and also there are performance optimisation
+        c. But If the temperature=0, and we set the random c; then we most likely get the same answer everytime.
+
+    |
+
+    As we see the temperature doesn't indicate the creativity. If we want out model to be more creative. The right way
+    to do that is through system prompt. The right way to do that is through to instruct the model to be more creative.
+    Give it example what it means to you to be creative, that's what creativity should be all about.
+
+    If we want different answers, then the best way to do it is to tell it the previous answers and ask it to give
+    different answers. That's the more reliable.
+
+
+----------------
+
