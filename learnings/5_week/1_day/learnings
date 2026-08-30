@@ -1,0 +1,79 @@
+
+
+------------
+RAG -> Small Picture
+
+    The small idea behind RAG:
+                 Chat
+            ^     |
+         (Answer) | (Question)
+                  |               Retrieve
+                 </>(Code)  <-----------------> (Knowledge base)
+           ^      |
+       (Response) | (prompt)
+                  |
+                  LLM
+
+--------------
+LLMs - Encoding LLMs vs Vector Embeddings
+
+    There are 2 different types of LLMs
+
+    1. Auto regressive LLMs -> PREDICTS FUTURE TOKENS FROM THE PAST INPUT
+        a.  Trained to take an Input token and to predict next token that should come after this Input sequence
+        b.  It's regressive and it looks bac over the input and predicts what should come next. It's predicts one
+            token i.e Just the next token. The trick is we feed in the new Input with the
+            (new token which is generated + old input). It just generates the next token and so on repeated again
+            and again.
+        c.  That's what an Auto-Regressive LLMs does. The reason it does is because that's what it trained to do so.
+
+    2. Auto-encoding LLMs or Embedding model or Vector Embedding Models (PRODUCT OUTPUT BASED ON THE FULL INPUT)
+        a.  Application include sentiment Analysis and classification
+        b.  Also used to calculate "Vector Embedding" represents an input as a list of number - i.e a vector
+        c.  Examples include BERT from Google and OpenAIEmbedding from OpenAI
+
+---------------
+Tokens vs Vectors
+
+    Token -> Input
+    Vectors -> Output
+
+    Vectors:
+        These vectors mathematically represents the meaning of an Input
+        1.  Can represents a character, a token, a word, an entire document, or something abstract.
+        2.  typically have hundreds or Thousands of dimensions
+        3.  Represents an understanding of the input; similar inputs are close to each other
+            > Points that are close to each other have similar meaning even thought the word themselves are completely
+              different.
+            > The model is trained so that it produces these number that have that these properties.
+            > There is another way that these vectors represents meaning of their inputs and it's bit subtle and it
+              was first discovered before transformers and before the LLM and this algorithm is called (WORD TO VEC)
+        4. Vector Match
+            The famous examples:
+                1.  (King - Man + Women) -> Queen
+                    If we do this vector math for (King - Man + Women) the closest point for this will be Queen
+                2.  (Paris - France + England) -> The closest point will be London.
+
+---------------
+RAG -> Bigger Picture
+
+    The big idea behind RAG:
+                                          CHAT
+                                     ↑     |
+                                 (Answer)  | (Question)
+                                           |     ↓
+                              <->          |             <->
+                            vectorize      |           Retrieve
+            ENCODING LLM <-------------> </>(CODE) <------------> (KNOWLEDGE BASE)
+                                           |
+                                   ↑       |
+                               (Response)  | (prompt + data retrieved)
+                                           |          ↓
+                                          LLM
+
+    Encoding LLM:
+        1.  Encoding LLM has nothing to do with Regressive LLM.
+        2.  It's been used just to help us with the fuzzy search. We are just use it to turn the questions into vectors
+            and we have used the same encoder to turn all of this data into vectrs as well.
+        3.  We are using this trick to pluck out the relevant information and that's what being sent to regressive LLM.
+            The relevant content not necessarily have the same words but have the same meaning.
