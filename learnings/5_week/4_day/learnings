@@ -1,0 +1,99 @@
+
+
+
+--------------
+Evaluations of RAG
+
+    PROs and CONs of RAG
+        PROs:
+        1.  Very quick to build, Rapid time to market
+        2.  Quite scalable approach:
+            > We can easily have 100 times as much data.
+            > The ingestion might take sometime but that will be one time thing and we can get the vectorstore.
+              Doing the query will be rally fast. We can tape into vast/huge expertise
+        3.  Save on context length:
+            > We don't need to fill the context with a lot of information. We just select the part that matters.
+        4.  Avoid distractions with irrelevant context.
+
+        CONs:
+        1.  It's a hack
+            > It's just a way to throw out the stuff PROBABLY, AND PROBABLY not important and focus on what is
+              important.
+        2.  "It's empirical" aka TRAIL and ERROR
+            > You might think it works everytime but it doesn't work everytime. We have to do a lot of experiments to
+              make it stable.
+        3.  Unexpected I don't know
+            > We might have the data related to the question similar like out previous day the question about IIOTY
+              award. But we got I don't know. This can happen many time.
+        4.  Great idea but we can have poor results.
+
+    Case-in-point -> Chunking strategy can have a significant impaction performance.
+
+    How do we convert this hack or art into Science.
+    This is where the Evals come into play, i.e evaluations. Find a way to measure and quantitative the performance
+    of our setup.
+
+    |
+
+    Evaluations:
+        The simple technique to get performance from the our RAG pipeline
+        Evaluations are everything.
+
+---------------
+Evaluations:
+
+    Step 1: Curate a Test Set
+    >   Is to build the golden set
+    >   Curate a set of question and answers that are going to be our reference answers against which we are going to
+        measure the performance
+    >   One way of doing that is, We come up with set of questions and then for each one we can identity the few
+        keywords that should be in the relevant contest that allows use to test the chunks we surface have these
+        keyword in it.
+
+    Step 2:
+        There are 2 types of tests
+        >   Measure Retrieval - We will measure how good is our retrieval
+            Metrics like
+                1. MRR (Mean Reciprocal Rank)
+                2. nDCG (Normalized Discount Cumulative Gain)
+                3. Recall@k
+                4. Precision@k
+        >   Measure Answers
+            Use LLM-as-a-judge, to score provided answers against criteria like accuracy, completeness and relevance
+
+    1. MRR (Mean Reciprocal Rank)
+        > Average inverse rank of first hit;
+        score:
+        1       if the first chunk always has relevant context
+        1/2     if the relevant context is in 2nd chunk
+        1/3     if tha relevant context is in 3rd chunk
+        1/4     if the relevant context is in 4th chunk
+        .
+        .
+        .
+        .
+        so on...
+
+        And we take average of if and that's called MRR
+
+    2. nDCG (Normalized Discount Cumulative Gain)
+        > It's not just looking at the first hit, it's looking at all the hits and asks the question how well
+          distributed are these hits in these chunks.
+        > Does it tend to be that the chunks that are relevant are the first few chunks? or does they come at lower
+          down? So it's more about the distribution of chunks in our results
+        > If all of the chunks that had relevant context are all top few once then we will score a perfect 1 with nDCG
+
+    3. Recall@k - k is a number like Recall@3 or Recall@4
+        > What % of out tests if we takes top k chunks was it a hit? There was relevant context in those top k chunks?
+        > If the score is 50% for Recall@k -> That means, In half of the cases, the top k chunks had relevant context
+          somewhere in them.
+        > Or if you have multiple keywords to look for keyword coverage is similar to recall metric.
+
+    4. Precision@k
+        > What proportion of the chinks that are surfaced had relevant context in them?
+        > If we are always surfacing k chunks, then on avg how many chunks of those k chunks have relevant context.
+        > If the score is 50% for Precision@k -> That means, In about half the chunks that are surfaced in each of our
+          RAG, we are surfacing relevant context.
+          Even if it's true of all the test cases, but our precision if only 50%. That means, in each case it's only
+          half of top k that are getting a hit in the chunks.
+
